@@ -9,7 +9,7 @@ import {
   BsThreeDotsVertical,
   FaCheck,
   FaTrashCan,
-} from "./Icons/index";
+} from "./Icons/icons";
 import NewTodoModal from "./components/Modals/NewTodoModal";
 
 const App = () => {
