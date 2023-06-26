@@ -1,59 +1,31 @@
-import { useState, useEffect } from "react";
-import { nanoid } from "nanoid";
-import { FiSettings } from "react-icons/fi";
-import { BsThreeDotsVertical } from "react-icons/bs";
-import { IoClose } from "react-icons/io5";
+import { useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-import { FaCheck, FaTrashCan } from "react-icons/fa6";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteTodo, completeTodo } from "./Store/slices/todoSlice";
 
-const initTodos = JSON.parse(localStorage.getItem("todos"))
-  ? JSON.parse(localStorage.getItem("todos"))
-  : [];
+import {
+  FiSettings,
+  BsThreeDotsVertical,
+  FaCheck,
+  FaTrashCan,
+} from "./Icons/index";
+import NewTodoModal from "./components/Modals/NewTodoModal";
 
 const App = () => {
+  const todos = useSelector((state) => state.todos.value);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [todos, setTodos] = useState(initTodos);
-  const [todo, setTodo] = useState({});
 
   const [parent] = useAutoAnimate();
+  const dispatch = useDispatch();
 
-  const addTodo = (e) => {
-    e.preventDefault();
-    console.log(todo);
-
-    let newTodo = {
-      ...todo,
-      id: nanoid(),
-      status: false,
-    };
-
-    setTodos((prev) => [newTodo, ...prev]);
-
-    setIsModalOpen(false);
-    setTodo({});
-    e.target.reset();
+  const handleDelete = (id) => {
+    dispatch(deleteTodo({ id }));
   };
 
-  const completeTodo = (id) => {
-    setTodos((prev) =>
-      prev
-        .map((todo) =>
-          todo.id === id ? { ...todo, status: !todo.status } : todo
-        )
-        .sort((a, b) => a.status - b.status)
-    );
+  const handleComplete = (id) => {
+    dispatch(completeTodo({ id }));
   };
-
-  const deleteTodo = (id) => {
-    setTodos((prev) =>
-      prev.filter((todo) => todo.id !== id).sort((a, b) => a.status - b.status)
-    );
-  };
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
 
   return (
     <div className="container mx-auto h-full flex flex-col">
@@ -97,7 +69,7 @@ const App = () => {
                     {todo.title}
                   </h1>
                   <p
-                    className={`text-semiLight text-[16px] ${
+                    className={`text-semiLight text-[16px] break-all ${
                       todo.status && "line-through"
                     }`}
                   >
@@ -107,7 +79,7 @@ const App = () => {
                 <div className="flex flex-col justify-center items-center gap-4">
                   <button
                     onClick={() => {
-                      completeTodo(todo.id);
+                      handleComplete(todo.id);
                     }}
                     className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-green outline-none focus:border-focusBorder duration-300"
                   >
@@ -115,7 +87,7 @@ const App = () => {
                   </button>
                   <button
                     onClick={() => {
-                      deleteTodo(todo.id);
+                      handleDelete(todo.id);
                     }}
                     className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder duration-300"
                   >
@@ -129,73 +101,7 @@ const App = () => {
       </div>
 
       {/* Modal */}
-
-      <div
-        className={`${
-          !isModalOpen && "hidden"
-        } fixed z-10 left-0 top-0 w-full h-full overflow-hidden bg-modalBG flex justify-center items-center`}
-      >
-        <form
-          onSubmit={addTodo}
-          className="bg-defaultBG max-w-[500px] max-h-[600px] w-full h-full mx-6 rounded-lg flex flex-col"
-        >
-          <div className="flex flex-row justify-end p-4 ">
-            <button
-              type="button"
-              onClick={(e) => {
-                e.target.parentElement.parentElement.reset();
-                setTodo({});
-                setIsModalOpen(false);
-              }}
-              className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder duration-300"
-            >
-              <IoClose className="text-light h-auto w-[22px]" />
-            </button>
-          </div>
-          <div className="flex flex-col gap-4 h-full p-4">
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="title"
-                className="text-light text-lg font-semibold"
-              >
-                Title
-              </label>
-              <input
-                className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder duration-300"
-                onChange={(e) => {
-                  setTodo((prev) => ({ ...prev, title: e.target.value }));
-                }}
-                type="text"
-                name="title"
-              />
-            </div>
-            <div className="flex flex-col gap-2">
-              <label
-                htmlFor="description"
-                className="text-light text-lg font-semibold"
-              >
-                Description
-              </label>
-              <textarea
-                className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder min-h-[10em] max-h-[15em]"
-                maxLength={512}
-                onChange={(e) => {
-                  setTodo((prev) => ({ ...prev, description: e.target.value }));
-                }}
-                name="description"
-              ></textarea>
-            </div>
-          </div>
-          <div className="flex flex-row justify-end p-4 gap-4">
-            <button
-              type="submit"
-              className="border-[2px] text-light border-defaultBorder p-2 px-4 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300"
-            >
-              Add
-            </button>
-          </div>
-        </form>
-      </div>
+      <NewTodoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
     </div>
   );
 };
