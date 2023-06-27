@@ -1,6 +1,6 @@
 # React Todo App
 
-This is a simple Todo application built using React and Tailwind CSS.
+This is a simple Todo application built using React, Redux, and Tailwind CSS.
 
 ## Installation
 
