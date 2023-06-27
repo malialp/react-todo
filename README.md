@@ -1,25 +1,25 @@
 # React Todo App
 
-This is a simple Todo application built using React and Tailwind CSS.
+This is a simple Todo application built using React, Redux, and Tailwind CSS.
 
 ## Installation
 
 1.  Clone the repository:
 
 ```bash
-`git clone https://github.com/malialp/react-todo`
+git clone https://github.com/malialp/react-todo
 ```
 
 2.  Navigate to the project directory:
 
 ```bash
-`cd react-todo`
+cd react-todo
 ```
 
 3.  Install the dependencies:
 
 ```bash
-`npm install`
+npm install
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ This is a simple Todo application built using React and Tailwind CSS.
 1.  Start the development server:
 
 ```bash
-`npm start`
+npm run dev
 ```
 
 2.  Open your web browser and visit [http://localhost:5173](http://localhost:5173/).
@@ -35,4 +35,4 @@ This is a simple Todo application built using React and Tailwind CSS.
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE.md). Feel free to modify and distribute it as per your requirements.
+This project is licensed under the [MIT License](./LICENSE). Feel free to modify and distribute it as per your requirements.
