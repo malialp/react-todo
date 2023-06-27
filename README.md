@@ -7,19 +7,19 @@ This is a simple Todo application built using React and Tailwind CSS.
 1.  Clone the repository:
 
 ```bash
-`git clone https://github.com/malialp/react-todo`
+git clone https://github.com/malialp/react-todo
 ```
 
 2.  Navigate to the project directory:
 
 ```bash
-`cd react-todo`
+cd react-todo
 ```
 
 3.  Install the dependencies:
 
 ```bash
-`npm install`
+npm install
 ```
 
 ## Usage
@@ -27,7 +27,7 @@ This is a simple Todo application built using React and Tailwind CSS.
 1.  Start the development server:
 
 ```bash
-`npm start`
+npm start
 ```
 
 2.  Open your web browser and visit [http://localhost:5173](http://localhost:5173/).
