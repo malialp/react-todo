@@ -2,6 +2,8 @@
 
 This is a simple Todo application built using React, Redux, and Tailwind CSS.
 
+[DEMO](https://react-todo-malialp.vercel.app/).
+
 ## Installation
 
 1.  Clone the repository:
