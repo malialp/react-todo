@@ -35,4 +35,4 @@ npm start
 
 ## License
 
-This project is licensed under the [MIT License](./LICENSE.md). Feel free to modify and distribute it as per your requirements.
+This project is licensed under the [MIT License](./LICENSE). Feel free to modify and distribute it as per your requirements.
