@@ -10,11 +10,15 @@ import {
   FaCheck,
   FaTrashCan,
 } from "./Icons/icons";
+
 import NewTodoModal from "./components/Modals/NewTodoModal";
+import SettingsModal from "./components/Modals/SettingsModal";
 
 const App = () => {
   const todos = useSelector((state) => state.todos.value);
-  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [isNewTodoOpen, setIsNewTodoOpen] = useState(false);
+  const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
   const [parent] = useAutoAnimate();
   const dispatch = useDispatch();
@@ -30,24 +34,29 @@ const App = () => {
   return (
     <div className="container mx-auto h-full flex flex-col">
       <div className="flex flex-row items-center p-4 gap-4 ">
-        <button className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300">
+        <button
+          onClick={() => {
+            setIsSettingsOpen(true);
+          }}
+          className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300"
+        >
           <FiSettings className="text-light h-auto w-[22px]" />
         </button>
         <input
-          className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG flex-1 text-light outline-none focus:border-focusBorder duration-300"
+          className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG flex-1 text-light outline-none focus:border-focusBorder duration-300"
           type="text"
           placeholder="Search"
         />
-        <button className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300">
+        <button className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300">
           <BsThreeDotsVertical className="text-light h-auto w-[22px]" />
         </button>
       </div>
       <div className="flex flex-col p-4 h-full overflow-y-auto gap-4">
         <button
           onClick={() => {
-            setIsModalOpen(true);
+            setIsNewTodoOpen(true);
           }}
-          className="border-[2px] border-defaultBorder hover:bg-defaultBG outline-none focus:border-focusBorder text-center text-light text-xl font-semibold rounded-lg p-4 duration-300"
+          className="border-2 border-defaultBorder hover:bg-defaultBG outline-none focus:border-focusBorder text-center text-light text-xl font-semibold rounded-lg p-4 duration-300"
         >
           New Todo
         </button>
@@ -58,7 +67,7 @@ const App = () => {
                 key={todo.id}
                 className={`${
                   todo.status && "opacity-50"
-                } bg-defaultBG border-[2px] border-defaultBorder rounded-lg mb-4 p-3 flex flex-row gap-4`}
+                } bg-defaultBG border-2 border-defaultBorder rounded-lg mb-4 p-3 flex flex-row gap-4`}
               >
                 <div className="flex flex-col gap-2 flex-1 justify-evenly">
                   <h1
@@ -81,7 +90,7 @@ const App = () => {
                     onClick={() => {
                       handleComplete(todo.id);
                     }}
-                    className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-green outline-none focus:border-focusBorder duration-300"
+                    className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-green outline-none focus:border-focusBorder duration-300"
                   >
                     <FaCheck className="text-light" />
                   </button>
@@ -89,7 +98,7 @@ const App = () => {
                     onClick={() => {
                       handleDelete(todo.id);
                     }}
-                    className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder duration-300"
+                    className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder duration-300"
                   >
                     <FaTrashCan className="text-light" />
                   </button>
@@ -101,7 +110,8 @@ const App = () => {
       </div>
 
       {/* Modal */}
-      <NewTodoModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} />
+      <NewTodoModal isOpen={isNewTodoOpen} setIsOpen={setIsNewTodoOpen} />
+      <SettingsModal isOpen={isSettingsOpen} setIsOpen={setIsSettingsOpen} />
     </div>
   );
 };
