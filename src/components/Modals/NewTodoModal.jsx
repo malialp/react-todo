@@ -7,7 +7,7 @@ import Modal from "../Modal";
 
 const initTodo = { title: "", description: "" };
 
-const NewTodoModal = ({ isModalOpen, setIsModalOpen }) => {
+const NewTodoModal = ({ isOpen, setIsOpen }) => {
   const [todo, setTodo] = useState(initTodo);
   const dispatch = useDispatch();
 
@@ -22,13 +22,13 @@ const NewTodoModal = ({ isModalOpen, setIsModalOpen }) => {
 
     dispatch(addTodo({ todo: newTodo }));
 
-    setIsModalOpen(false);
+    setIsOpen(false);
     setTodo(initTodo);
     e.target.reset();
   };
 
   return (
-    <Modal toggle={isModalOpen}>
+    <Modal toggle={isOpen}>
       <form
         onSubmit={handleSubmit}
         className="bg-defaultBG max-w-[500px] max-h-[600px] w-full h-full mx-6 rounded-lg flex flex-col"
@@ -39,20 +39,23 @@ const NewTodoModal = ({ isModalOpen, setIsModalOpen }) => {
             onClick={(e) => {
               e.target.parentElement.parentElement.reset();
               setTodo({});
-              setIsModalOpen(false);
+              setIsOpen(false);
             }}
-            className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder duration-300"
+            className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder focus:bg-red duration-300"
           >
             <IoClose className="text-light h-auto w-[22px]" />
           </button>
         </div>
         <div className="flex flex-col gap-4 h-full p-4">
           <div className="flex flex-col gap-2">
-            <label htmlFor="title" className="text-light text-lg font-semibold">
+            <label
+              htmlFor="title"
+              className="text-light text-lg xl:text-xl font-semibold"
+            >
               Title
             </label>
             <input
-              className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder duration-300"
+              className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder duration-300"
               onChange={(e) => {
                 setTodo((prev) => ({ ...prev, title: e.target.value }));
               }}
@@ -63,12 +66,12 @@ const NewTodoModal = ({ isModalOpen, setIsModalOpen }) => {
           <div className="flex flex-col gap-2">
             <label
               htmlFor="description"
-              className="text-light text-lg font-semibold"
+              className="text-light text-lg xl:text-xl font-semibold"
             >
               Description
             </label>
             <textarea
-              className="border-[2px] border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder min-h-[10em] max-h-[15em]"
+              className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder min-h-[10em] max-h-[15em]"
               maxLength={512}
               onChange={(e) => {
                 setTodo((prev) => ({ ...prev, description: e.target.value }));
@@ -80,7 +83,7 @@ const NewTodoModal = ({ isModalOpen, setIsModalOpen }) => {
         <div className="flex flex-row justify-end p-4 gap-4">
           <button
             type="submit"
-            className="border-[2px] text-light border-defaultBorder p-2 px-4 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder duration-300"
+            className="border-2 text-light border-defaultBorder p-2 px-4 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder focus:bg-hoverBG duration-300"
           >
             Add
           </button>
