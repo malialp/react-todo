@@ -31,7 +31,7 @@ const NewTodoModal = ({ isOpen, setIsOpen }) => {
     <Modal toggle={isOpen}>
       <form
         onSubmit={handleSubmit}
-        className="bg-defaultBG max-w-[500px] max-h-[600px] w-full h-full mx-6 rounded-lg flex flex-col"
+        className="mx-6 flex h-full max-h-[600px] w-full max-w-[500px] flex-col rounded-lg bg-light-background dark:bg-dark-background-2"
       >
         <div className="flex flex-row justify-end p-4 ">
           <button
@@ -41,21 +41,21 @@ const NewTodoModal = ({ isOpen, setIsOpen }) => {
               setTodo({});
               setIsOpen(false);
             }}
-            className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder focus:bg-red duration-300"
+            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:bg-btn-red hover:text-light-text focus:border-light-border-focus focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
           >
-            <IoClose className="text-light h-auto w-[22px]" />
+            <IoClose className="h-auto w-[22px]" />
           </button>
         </div>
-        <div className="flex flex-col gap-4 h-full p-4">
+        <div className="flex h-full flex-col gap-4 p-4">
           <div className="flex flex-col gap-2">
             <label
               htmlFor="title"
-              className="text-light text-lg xl:text-xl font-semibold"
+              className="text-lg font-semibold text-dark-text dark:text-light-text xl:text-xl"
             >
               Title
             </label>
             <input
-              className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder duration-300"
+              className="rounded-lg border-2 border-light-border bg-light-background p-2 text-dark-text outline-none duration-300 focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:focus:border-dark-border-focus"
               onChange={(e) => {
                 setTodo((prev) => ({ ...prev, title: e.target.value }));
               }}
@@ -66,12 +66,12 @@ const NewTodoModal = ({ isOpen, setIsOpen }) => {
           <div className="flex flex-col gap-2">
             <label
               htmlFor="description"
-              className="text-light text-lg xl:text-xl font-semibold"
+              className="text-lg font-semibold text-dark-text dark:text-light-text xl:text-xl"
             >
               Description
             </label>
             <textarea
-              className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG text-light outline-none focus:border-focusBorder min-h-[10em] max-h-[15em]"
+              className="max-h-[15em] min-h-[10em] rounded-lg border-2 border-light-border bg-light-background p-2 text-dark-text outline-none focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:focus:border-dark-border-focus"
               maxLength={512}
               onChange={(e) => {
                 setTodo((prev) => ({ ...prev, description: e.target.value }));
@@ -80,10 +80,10 @@ const NewTodoModal = ({ isOpen, setIsOpen }) => {
             ></textarea>
           </div>
         </div>
-        <div className="flex flex-row justify-end p-4 gap-4">
+        <div className="flex flex-row justify-end gap-4 p-4">
           <button
             type="submit"
-            className="border-2 text-light border-defaultBorder p-2 px-4 rounded-lg bg-defaultBG hover:bg-hoverBG outline-none focus:border-focusBorder focus:bg-hoverBG duration-300"
+            className="rounded-lg border-2 border-light-border bg-light-background p-2 px-4 text-dark-text outline-none duration-300 hover:bg-light-background-2 focus:border-light-border-focus focus:bg-light-background-2 dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus dark:focus:bg-dark-hover-background"
           >
             Add
           </button>

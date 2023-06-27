@@ -1,7 +1,12 @@
 import Modal from "../Modal";
 import { IoClose } from "../../Icons/icons";
+import { useDispatch, useSelector } from "react-redux";
+import { updateSettings } from "../../Store/slices/settingSlice";
 
 const Settings = ({ isOpen, setIsOpen }) => {
+  const settings = useSelector((state) => state.settings.value);
+  const dispatch = useDispatch();
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -11,11 +16,15 @@ const Settings = ({ isOpen, setIsOpen }) => {
     e.target.reset();
   };
 
+  const handleTheme = (e) => {
+    dispatch(updateSettings({ theme: e.target.value }));
+  };
+
   return (
     <Modal toggle={isOpen}>
       <form
         onSubmit={handleSubmit}
-        className="bg-defaultBG max-w-[500px] max-h-[600px] w-full h-full mx-6 rounded-lg flex flex-col"
+        className="mx-6 flex h-full max-h-[600px] w-full max-w-[500px] flex-col rounded-lg bg-light-background dark:bg-dark-background-2"
       >
         <div className="flex flex-row justify-end p-4 ">
           <button
@@ -24,26 +33,28 @@ const Settings = ({ isOpen, setIsOpen }) => {
               e.target.parentElement.parentElement.reset();
               setIsOpen(false);
             }}
-            className="border-2 border-defaultBorder p-2 rounded-lg bg-defaultBG hover:bg-red outline-none focus:border-focusBorder focus:bg-red duration-300"
+            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:bg-btn-red hover:text-light-text focus:border-light-border-focus focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
           >
-            <IoClose className="text-light h-auto w-[22px]" />
+            <IoClose className="text-lightText h-auto w-[22px]" />
           </button>
         </div>
-        <div className="flex flex-col gap-4 h-full p-4">
+        <div className="flex h-full flex-col gap-4 p-4">
           <div className="flex flex-col gap-4">
-            <h1 className="text-light text-lg xl:text-xl font-semibold">
+            <h1 className="font-semibold text-dark-text dark:text-light-text xl:text-xl">
               Theme
             </h1>
-            <div className="flex flex-row justify-between items-center px-1">
+            <div className="flex flex-row items-center justify-between px-1">
               <label
                 htmlFor="theme"
-                className="text-md text-semiLight font-semibold"
+                className="text-md font-semibold text-dark-text-2 dark:text-light-text-2"
               >
                 Theme
               </label>
               <select
                 name="theme"
-                className="bg-hoverBG text-light rounded-lg p-1 outline-none cursor-pointer border-2 border-transparent focus:border-focusBorder duration-300"
+                onChange={handleTheme}
+                value={settings.theme}
+                className="cursor-pointer rounded-lg border-2 border-transparent bg-light-background p-1 text-dark-text outline-none duration-300 dark:bg-dark-background-2 dark:text-light-text"
               >
                 <option value="light">Light</option>
                 <option value="dark">Dark</option>
@@ -51,10 +62,10 @@ const Settings = ({ isOpen, setIsOpen }) => {
             </div>
           </div>
         </div>
-        <div className="flex flex-row justify-end p-4 gap-4">
+        <div className="flex flex-row justify-end gap-4 p-4">
           <button
             type="submit"
-            className="border-2 text-light border-defaultBorder p-2 px-4 rounded-lg bg-defaultBG hover:bg-hoverBG focus:bg-hoverBG outline-none focus:border-focusBorder duration-300"
+            className="rounded-lg border-2 border-light-border bg-light-background p-2 px-4 text-dark-text outline-none duration-300 hover:bg-light-background-2 focus:border-light-border-focus focus:bg-light-background-2 dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus dark:focus:bg-dark-hover-background"
           >
             Save
           </button>

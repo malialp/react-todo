@@ -5,7 +5,7 @@ const Modal = (props) => {
     <div
       className={`${
         !props.toggle && "hidden"
-      } fixed z-10 left-0 top-0 w-full h-full overflow-hidden bg-modalBG flex justify-center items-center`}
+      } fixed left-0 top-0 z-10 flex h-full w-full items-center justify-center overflow-hidden bg-modal-bg`}
     >
       {props.children}
     </div>
