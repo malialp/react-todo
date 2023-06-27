@@ -27,7 +27,7 @@ npm install
 1.  Start the development server:
 
 ```bash
-npm start
+npm run dev
 ```
 
 2.  Open your web browser and visit [http://localhost:5173](http://localhost:5173/).
