@@ -33,7 +33,7 @@ const Settings = ({ isOpen, setIsOpen }) => {
               e.target.parentElement.parentElement.reset();
               setIsOpen(false);
             }}
-            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:bg-btn-red hover:text-light-text focus:border-light-border-focus focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:border-btn-red hover:bg-btn-red hover:text-light-text focus:border-btn-red focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
           >
             <IoClose className="text-lightText h-auto w-[22px]" />
           </button>
@@ -60,6 +60,11 @@ const Settings = ({ isOpen, setIsOpen }) => {
                 <option value="dark">Dark</option>
               </select>
             </div>
+          </div>
+          <div className="flex h-full items-center justify-center">
+            <h1 className="text-xl text-dark-text-2 dark:text-light-text-2">
+              More coming soon...
+            </h1>
           </div>
         </div>
         <div className="flex flex-row justify-end gap-4 p-4">

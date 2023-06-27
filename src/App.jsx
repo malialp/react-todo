@@ -90,7 +90,7 @@ const App = () => {
                     onClick={() => {
                       handleComplete(todo.id);
                     }}
-                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:bg-btn-green hover:text-light-text focus:border-light-border-focus focus:bg-btn-green focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-green hover:bg-btn-green hover:text-light-text focus:border-btn-green focus:bg-btn-green focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
                   >
                     <FaCheck />
                   </button>
@@ -98,7 +98,7 @@ const App = () => {
                     onClick={() => {
                       handleDelete(todo.id);
                     }}
-                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:bg-btn-red hover:text-light-text focus:border-light-border-focus focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-red hover:bg-btn-red hover:text-light-text focus:border-btn-red focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
                   >
                     <FaTrashCan />
                   </button>

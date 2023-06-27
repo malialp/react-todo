@@ -41,7 +41,7 @@ const NewTodoModal = ({ isOpen, setIsOpen }) => {
               setTodo({});
               setIsOpen(false);
             }}
-            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:bg-btn-red hover:text-light-text focus:border-light-border-focus focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+            className="rounded-lg border-2 p-2 text-dark-text outline-none duration-300 hover:border-btn-red hover:bg-btn-red hover:text-light-text focus:border-btn-red focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
           >
             <IoClose className="h-auto w-[22px]" />
           </button>
