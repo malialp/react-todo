@@ -3,10 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      const settings = JSON.parse(localStorage.getItem("settings"));
+      if (settings) {
+        if (settings.theme === "dark") {
+          document.documentElement.classList.add("dark");
+        } else {
+          document.documentElement.classList.remove("dark");
+        }
+      }
+    </script>
+
     <title>Todo</title>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="root" class="bg-light-background dark:bg-dark-background"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
