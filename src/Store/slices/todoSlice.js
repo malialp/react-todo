@@ -1,4 +1,4 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initTodos = () => {
   const todos = JSON.parse(localStorage.getItem("todos"));

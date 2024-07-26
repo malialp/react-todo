@@ -45,6 +45,7 @@ const App = () => {
         <a
           href="https://github.com/malialp/react-todo"
           target="_blank"
+          rel="noreferrer"
           className="cursor-pointer rounded-lg border-2 border-light-border p-2 outline-none duration-300 hover:bg-light-background-2 focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus"
         >
           <BsGithub className="h-auto w-[22px]" />
