@@ -27,7 +27,6 @@ const App = () => {
   };
 
   const filterSearch = (param) => {
-    console.log(param);
     setTodos(
       initValue.filter(
         (e) =>
