@@ -10,8 +10,8 @@ import NewTodoModal from "./components/Modals/NewTodoModal";
 import SettingsModal from "./components/Modals/SettingsModal";
 
 const App = () => {
-  const todos = useSelector((state) => state.todos.value);
-
+  const initValue = useSelector((state) => state.todos.value);
+  const [todos, setTodos] = useState(initValue);
   const [isNewTodoOpen, setIsNewTodoOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
 
@@ -26,6 +26,17 @@ const App = () => {
     dispatch(completeTodo({ id }));
   };
 
+  const filterSearch = (param) => {
+    console.log(param);
+    setTodos(
+      initValue.filter(
+        (e) =>
+          e.title.toLowerCase().indexOf(param) > -1 ||
+          e.description.toLowerCase().indexOf(param) > -1
+      )
+    );
+  };
+
   return (
     <div className="container mx-auto flex h-full flex-col">
       <div className="flex flex-row items-center gap-4 p-4 ">
@@ -33,13 +44,14 @@ const App = () => {
           onClick={() => {
             setIsSettingsOpen(true);
           }}
-          className="rounded-lg border-2 border-light-border p-2 outline-none  duration-300 hover:bg-light-background-2  focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus"
+          className="rounded-lg border-2 border-light-border p-2 outline-none duration-300 hover:bg-light-background-2 focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus"
         >
           <FiSettings className="h-auto w-[22px]" />
         </button>
         <input
           className="flex-1 rounded-lg border-2 border-light-border p-2 outline-none duration-300 hover:bg-light-background-2 focus:border-light-border-focus dark:border-dark-border dark:bg-dark-background-2 dark:text-light-text dark:hover:bg-dark-hover-background dark:focus:border-dark-border-focus"
           type="text"
+          onChange={(e) => filterSearch(e.target.value)}
           placeholder="Search"
         />
         <a
