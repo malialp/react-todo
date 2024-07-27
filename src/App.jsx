@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Scrollbars } from "react-custom-scrollbars-2";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -10,10 +10,12 @@ import NewTodoModal from "./components/Modals/NewTodoModal";
 import SettingsModal from "./components/Modals/SettingsModal";
 
 const App = () => {
-  const initValue = useSelector((state) => state.todos.value);
-  const [todos, setTodos] = useState(initValue);
+  const todos = useSelector((state) => state.todos.value);
+
   const [isNewTodoOpen, setIsNewTodoOpen] = useState(false);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+
+  const [searchParam, setSearchParam] = useState("");
 
   const [parent] = useAutoAnimate();
   const dispatch = useDispatch();
@@ -27,13 +29,7 @@ const App = () => {
   };
 
   const filterSearch = (param) => {
-    setTodos(
-      initValue.filter(
-        (e) =>
-          e.title.toLowerCase().indexOf(param) > -1 ||
-          e.description.toLowerCase().indexOf(param) > -1
-      )
-    );
+    setSearchParam(param);
   };
 
   return (
@@ -73,49 +69,55 @@ const App = () => {
         </button>
         <Scrollbars autoHide>
           <div ref={parent}>
-            {todos.map((todo) => (
-              <div
-                key={todo.id}
-                className={`${
-                  todo.status && "opacity-50"
-                } mb-4 flex flex-row gap-4 rounded-lg border-2 border-light-border bg-light-background p-3 dark:border-dark-border dark:bg-dark-background-2`}
-              >
-                <div className="flex flex-1 flex-col justify-evenly gap-2">
-                  <h1
-                    className={`text-[22px] font-semibold text-dark-text dark:text-light-text ${
-                      todo.status && "line-through"
-                    }`}
-                  >
-                    {todo.title}
-                  </h1>
-                  <p
-                    className={`break-all text-[16px] text-dark-text-2 dark:text-light-text-2 ${
-                      todo.status && "line-through"
-                    }`}
-                  >
-                    {todo.description}
-                  </p>
+            {todos
+              .filter(
+                (e) =>
+                  e.title.toLowerCase().indexOf(searchParam) > -1 ||
+                  e.description.toLowerCase().indexOf(searchParam) > -1
+              )
+              .map((todo) => (
+                <div
+                  key={todo.id}
+                  className={`${
+                    todo.status && "opacity-50"
+                  } mb-4 flex flex-row gap-4 rounded-lg border-2 border-light-border bg-light-background p-3 dark:border-dark-border dark:bg-dark-background-2`}
+                >
+                  <div className="flex flex-1 flex-col justify-evenly gap-2">
+                    <h1
+                      className={`text-[22px] font-semibold text-dark-text dark:text-light-text ${
+                        todo.status && "line-through"
+                      }`}
+                    >
+                      {todo.title}
+                    </h1>
+                    <p
+                      className={`break-all text-[16px] text-dark-text-2 dark:text-light-text-2 ${
+                        todo.status && "line-through"
+                      }`}
+                    >
+                      {todo.description}
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-center justify-center gap-4">
+                    <button
+                      onClick={() => {
+                        handleComplete(todo.id);
+                      }}
+                      className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-green hover:bg-btn-green hover:text-light-text focus:border-btn-green focus:bg-btn-green focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+                    >
+                      <FaCheck />
+                    </button>
+                    <button
+                      onClick={() => {
+                        handleDelete(todo.id);
+                      }}
+                      className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-red hover:bg-btn-red hover:text-light-text focus:border-btn-red focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
+                    >
+                      <FaTrashCan />
+                    </button>
+                  </div>
                 </div>
-                <div className="flex flex-col items-center justify-center gap-4">
-                  <button
-                    onClick={() => {
-                      handleComplete(todo.id);
-                    }}
-                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-green hover:bg-btn-green hover:text-light-text focus:border-btn-green focus:bg-btn-green focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
-                  >
-                    <FaCheck />
-                  </button>
-                  <button
-                    onClick={() => {
-                      handleDelete(todo.id);
-                    }}
-                    className="rounded-lg border-2 p-2 outline-none duration-300 hover:border-btn-red hover:bg-btn-red hover:text-light-text focus:border-btn-red focus:bg-btn-red focus:text-light-text dark:border-dark-border dark:text-light-text dark:focus:border-dark-border-focus"
-                  >
-                    <FaTrashCan />
-                  </button>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         </Scrollbars>
       </div>
